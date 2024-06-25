@@ -25,3 +25,145 @@
     #topic-caption:hover {
     transform: scale(1.1); /* Slightly increase size on hover */
     }
+
+
+ @keyframes fadeInDown {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    }
+
+    /* Add hover effect and animation to carousel slides */
+    .carousel-item img:hover {
+    transform: scale(1.05); /* Slightly increase size on hover */
+    transition: transform 0.3s; /* Smooth transition on hover */
+    }
+
+        .carousel-item img {
+            height: 500px; /* Adjust height of carousel images */
+            object-fit: cover; /* Ensure images cover the carousel area */
+
+        }
+
+        .carousel-caption {
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background for captions */
+            padding: 20px;
+            border-radius: 10px;
+            animation: slideUp 4s ease-in-out; /* Animation for slide up */
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(20%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .carousel-caption h5 {
+            font-family: 'sans-serif'; /* Applying a fancy font to the headings */
+        }
+
+        .carousel-caption p {
+            font-family: 'Roboto', sans-serif; /* Applying a clean, readable font to the captions */
+        }
+
+        /* Responsive font sizes */
+        @media (max-width: 767px) {
+            .carousel-caption h5 {
+                font-size: 1.5rem; /* Smaller font size for small screens */
+            }
+
+            .carousel-caption p {
+                font-size: 0.875rem; /* Smaller font size for small screens */
+            }
+        }
+
+        @media (min-width: 768px) and (max-width: 991px) {
+            .carousel-caption h5 {
+                font-size: 2rem; /* Medium font size for tablets */
+            }
+
+            .carousel-caption p {
+                font-size: 1rem; /* Medium font size for tablets */
+            }
+        }
+
+        @media (min-width: 992px) {
+            .carousel-caption h5 {
+                font-size: 2.5rem; /* Larger font size for desktops */
+            }
+
+            .carousel-caption p {
+                font-size: 1.25rem; /* Larger font size for desktops */
+            }
+        }
+
+@keyframes fadeInUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.card-square {
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+    height: 300px; /* Set a fixed height */
+    color: white; /* Text color */
+    animation: fadeInUp 1s ease-in-out; /* Animation applied to card */
+    transition: transform 0.3s; /* Smooth transition on hover */
+}
+
+.card-square:hover {
+    transform: scale(1.05); /* Slightly increase size on hover */
+}
+
+.overlay {
+    position: absolute;
+    top: 40px;
+    left: 20px;
+    width: 320px;
+    height: 200px;
+    background-color: rgba(255, 255, 255, 0.8); /* White with transparency */
+    border-radius: 15px;
+    z-index: 1;
+    opacity: 0.5; /* Adjust opacity as needed */
+    animation: fadeInUp 1s ease-in-out; /* Animation applied to overlay */
+}
+
+.card-body {
+    position: relative;
+    z-index: 2;
+    padding: 20px;
+    animation: fadeInUp 1s ease-in-out; /* Animation applied to card body */
+}
+
+.card-title,
+.card-text {
+    top: 40px;
+    color: black; /* Text color */
+    position: relative;
+    z-index: 2;
+    font-weight: bold; /* Make the font bold */
+    animation: fadeInUp 1s ease-in-out; /* Animation applied to text */
+}
+
+
+{% endblock style %}
+
+
+
