@@ -3,3 +3,25 @@
 {% block title %}Home{% endblock title %}
 {%load static%}
 {% block style %}
+
+/* Custom styles for the home page */
+        body {
+            background-color: #343a40; /* Dark background color */
+            color: #ffffff; /* White text color */
+            padding-top: 80px; /* Adjusted padding for fixed navbar */
+        }
+
+        /* Custom styles for the topic caption */
+    #topic-caption {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: orange; /* Attractive yellow color */
+    animation: fadeInDown 1s ease-in-out; /* Animation for topic caption */
+    transition: transform 0.3s; /* Smooth transition on hover */
+    }
+
+    #topic-caption:hover {
+    transform: scale(1.1); /* Slightly increase size on hover */
+    }
