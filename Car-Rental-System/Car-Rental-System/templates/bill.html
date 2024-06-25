@@ -268,3 +268,263 @@
 
     </style>
   </head>
+  <body>
+
+  <div class="container mt-5">
+    <!-- Display Django messages -->
+    {% if messages %}
+    <div class="alert-container">
+        {% for message in messages %}
+        <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %} custom-popup" role="alert">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
+
+    <div style="background-color: black; color: white; padding: 10px 0; position: fixed; top: 0; width: 100%; z-index: 1000;">
+      <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+        <div class="contact-info" style="display: flex; align-items: center;">
+          <a href="tel:+1234567890" style="color: white; margin-left: 15px;">
+            <i class="fas fa-phone-alt"></i> +1 234 567 890
+          </a>
+          <a href="mailto:ask@happydeals.lk" style="color: white; margin-left: 15px;">
+            <i class="fas fa-envelope"></i> ask@happydeals.lk
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">Happydeals</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/home">Home</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/about">About Us</a>
+          </li>
+          {% if user.is_authenticated %}
+          <li class="nav-item active">
+            <a class="nav-link" href="/vehicles">Vehicles</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/contact">Contact</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/signout">Log Out</a>
+          </li>
+          {% else %}
+          <li class="nav-item active">
+            <a class="nav-link" href="/signin">Login</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/signup">Sign Up</a>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container bill-container">
+      <div class="bill-form-box">
+        <h2>Enter Your Information</h2>
+        <div class="bill-form-fields">
+            <!-- Form for customer information -->
+            <form id="rentForm" method="post">
+                 {% csrf_token %}
+                <label for="customerName">Customer Name</label>
+                <input type="text" id="customerName" name="customerName" value="{{ request.user.username }}" required>
+
+                <label for="customerPhone">Customer Phone</label>
+                <input type="tel" id="customerPhone" name="customerPhone" required>
+
+                <label for="nic">NIC</label>
+                <input type="text" id="nic" name="nic" required>
+
+                <label for="pickupDate">Pickup Date</label>
+                <input type="date" id="pickupDate" name="pickupDate" required>
+
+                <label for="pickupTime">Pickup Time</label>
+                <input type="time" id="pickupTime" name="pickupTime" required>
+
+                <label for="returnDate">Return Date</label>
+                <input type="date" id="returnDate" name="returnDate" required>
+
+                <!-- Hidden field for car ID -->
+                <input type="hidden" id="carId" name="carId" value="{{ vehicle.id }}">
+
+                <div class="bill-form-buttons">
+                <button type="submit" class="bill-rent-now btn btn-secondary">Rent Now</button>
+                <button type="button" class="bill-rent-now btn btn-secondary" onclick="calculateAdvancePayment()">Advance Payment</button>
+                <button type="button" class="bill-cancel btn btn-secondary" onclick="window.location.href='{% url 'home' %}'">Exit</button>
+            </div>
+        </form>
+        </div>
+      </div>
+
+      <div class="bill-car-info-box">
+        <h2>Car Information</h2>
+        <div class="bill-car-info">
+          <img id="carImage" src="{{ vehicle.image_url }}" alt="Car Image">
+          <h3>{{ vehicle.car_name }}</h3>
+          <div id="carDescription">
+            <p>{{ vehicle.car_desc }}</p>
+            <p>Maximum Persons: {{ vehicle.max_persons }}</p>
+            <p>Fuel Efficiency: {{ vehicle.fuel_efficiency }} km/l</p>
+            <p>Price per Km: Rs. {{ vehicle.price_per_km }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+<footer class="page-footer text-center font-small blue pt-4">
+    <!-- Map Section -->
+    <div class="footer-map">
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31683.17665779305!2d79.92861743720727!3d6.875033187905898!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae2466d0c8b11c9%3A0x1d5820f0b9f1241f!2sThalawathugoda!5e0!3m2!1sen!2slk!4v1657362417058!5m2!1sen!2slk"
+            width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+    <!-- Footer Links -->
+    <div class="container text-center text-md-left mt-5">
+        <div class="row">
+            <div class="col-md-3 mx-auto mb-4">
+                <h6 class="text-uppercase font-weight-bold">Address</h6>
+                <p>549, 252/1a Main Rd, Thalawathugoda, Sri Lanka</p>
+            </div>
+            <div class="col-md-3 mx-auto mb-4">
+                <h6 class="text-uppercase font-weight-bold">Contact</h6>
+                <p>Email: ask@happydeals.lk, travel@happydeals.lk</p>
+                <p>Phone: +94 11 123 4567</p>
+            </div>
+            <div class="col-md-3 mx-auto mb-4">
+                <h6 class="text-uppercase font-weight-bold">Services</h6>
+                <ul class="list-unstyled">
+                    <li>Car Rentals</li>
+                    <li>Chauffeur Services</li>
+                    <li>Airport Transfers</li>
+                    <li>Corporate Rentals</li>
+                </ul>
+            </div>
+            <div class="col-md-3 mx-auto mb-4">
+                <h6 class="text-uppercase font-weight-bold">Follow Us</h6>
+                <ul class="list-unstyled">
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">LinkedIn</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3">
+        © 2022 Copyright: HappyDeals Car Rental Service
+    </div>
+</footer>
+
+<!-- Custom Alert Modal -->
+<div class="modal fade" id="customAlertModal" tabindex="-1" role="dialog" aria-labelledby="customAlertModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content" style="background-color: white; color: black;">
+      <div class="modal-header">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRu4Q-GK935-doxT3bKVHBb_6HTeZtJn9AhBw&s" alt="Happy Deals Logo" style="max-height: 50px; margin-right: 10px;">
+        <h5 class="modal-title" id="customAlertModalLabel">Thank you, {{ request.user.username }} for Dealing with HappyDeals</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Booking Details:</p>
+        <ul>
+          <li>Vehicle: <span id="modalVehicle"></span></li>
+          <li>Customer Name: <span id="modalCustomerName"></span></li>
+          <li>Customer Phone: <span id="modalCustomerPhone"></span></li>
+          <li>NIC: <span id="modalNic"></span></li>
+          <li>Pickup Date: <span id="modalPickupDate"></span></li>
+          <li>Return Date: <span id="modalReturnDate"></span></li>
+          <li>Advance Payment: Rs. <span id="modalAdvancePayment"></span></li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="downloadReceipt()"><i class="fas fa-download"></i> Download Receipt</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+      function calculateAdvancePayment() {
+  const pricePerKm = {{ vehicle.price_per_km }};
+  const pickupDate = new Date(document.getElementById('pickupDate').value);
+  const returnDate = new Date(document.getElementById('returnDate').value);
+  const timeDiff = Math.abs(returnDate.getTime() - pickupDate.getTime());
+  const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+  const advancePayment = pricePerKm * daysDiff * 10;
+
+  const customerName = document.getElementById('customerName').value;
+  const customerPhone = document.getElementById('customerPhone').value;
+  const nic = document.getElementById('nic').value;
+
+  document.getElementById('modalVehicle').innerText = "{{ vehicle.car_name }}";
+  document.getElementById('modalCustomerName').innerText = customerName;
+  document.getElementById('modalCustomerPhone').innerText = customerPhone;
+  document.getElementById('modalNic').innerText = nic;
+  document.getElementById('modalPickupDate').innerText = pickupDate.toDateString();
+  document.getElementById('modalReturnDate').innerText = returnDate.toDateString();
+  document.getElementById('modalAdvancePayment').innerText = advancePayment;
+
+  $('#customAlertModal').modal('show');
+}
+
+function downloadReceipt() {
+  const canvas = document.createElement('canvas');
+  canvas.width = 800;
+  canvas.height = 350;
+  const ctx = canvas.getContext('2d');
+
+  // Draw grey background
+  ctx.fillStyle = '#808080'; // Use grey color
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  ctx.fillStyle = 'black'; // Set text color to white
+  ctx.font = 'bold 20px Arial';
+  ctx.fillText('Thank you, ' + '{{ request.user.username }}' + ' for Dealing with HappyDeals', 50, 50);
+
+  ctx.font = 'bold 16px Arial';
+  ctx.fillText('Booking Details:', 50, 90);
+  ctx.fillText('Vehicle: ' + document.getElementById('modalVehicle').innerText, 50, 120);
+  ctx.fillText('Customer Name: ' + document.getElementById('modalCustomerName').innerText, 50, 150);
+  ctx.fillText('Customer Phone: ' + document.getElementById('modalCustomerPhone').innerText, 50, 180);
+  ctx.fillText('NIC: ' + document.getElementById('modalNic').innerText, 50, 210);
+  ctx.fillText('Pickup Date: ' + document.getElementById('modalPickupDate').innerText, 50, 240);
+  ctx.fillText('Return Date: ' + document.getElementById('modalReturnDate').innerText, 50, 270);
+  ctx.fillText('Advance Payment: Rs. ' + document.getElementById('modalAdvancePayment').innerText, 50, 300);
+
+  const downloadLink = document.createElement('a');
+  downloadLink.href = canvas.toDataURL('image/jpeg'); // Use JPEG format
+  downloadLink.download = 'receipt.jpg'; // Use .jpg extension
+  document.body.appendChild(downloadLink);
+  downloadLink.click();
+  document.body.removeChild(downloadLink);
+}
+
+
+
+
+    </script>
+  </body>
+</html>
+
