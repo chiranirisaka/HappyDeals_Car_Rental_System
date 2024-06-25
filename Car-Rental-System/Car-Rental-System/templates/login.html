@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+  body {
+        padding-top: 20px; /* Adjusted padding to accommodate the top bars */
+        background-color: white; /* Set background color to grey */
+        color: black;
+        font-family: 'Roboto', sans-serif;
+        background-image: url("{% static 'bill.jpg' %}");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed; /* Ensures the background image stays fixed */
+        opacity: 1;
+      }
+
+
+
+  .card {
+    background-color: rgba(255, 255, 255, 0.7); /* Transparent white background */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Adding a shadow */
+  }
+
+  .btn {
+    background-color: orange;
+    color: white;
+  }
+
+{% endblock style %}
+
+
+
