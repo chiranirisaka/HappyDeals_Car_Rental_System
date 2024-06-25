@@ -23,4 +23,4 @@ path('delete_booking/<int:booking_id>/', views.delete_booking, name='delete_book
     # path("bill", views.bill, name="bill"),
 
     ]
-    ]
+    
