@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Contact{% endblock title %}
+
+{% block style %}
+body {
+    padding-top: 20px; /* Adjusted padding to accommodate the top bars */
+    background-color: white; /* Set background color */
+    color: red; /* Text color */
+    font-family: 'Roboto', sans-serif;
+    background-image: url("{% static 'cardeal.webp' %}");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Ensures the background image stays fixed */
+    opacity: 1;
+}
+
+.card {
+    background-color: rgba(255, 255, 255, 0.7); /* Transparent white background */
+    border: none; /* Remove border */
+}
+
+.card-body {
+    padding: 2rem; /* Adjust padding inside the card body */
+}
+{% endblock style %}
