@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block style %}
+  body {
+    padding-top: 20px; /* Adjusted padding to accommodate the top bars */
+    color: black;
+    font-family: 'Roboto', sans-serif;
+    background-image: url("{% static 'reg.jpg' %}");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Ensures the background image stays fixed */
+  }
+
+  .card-registration {
+    background-color: rgba(255, 255, 255, 0.8); /* Transparent white background */
+    border: none; /* Remove border */
+    box-shadow: none; /* Remove box shadow */
+  }
+
+  .card-registration .card-body {
+    padding: 30px; /* Optional: Adjust padding inside the card body */
+  }
+{% endblock style %}
