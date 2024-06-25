@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {% load static %}
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&family=Roboto:wght@400;700&display=swap">
+    <!-- Additional Bootstrap CSS with integrity check -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Bill - HappyDeals</title>
+
+    <style>
+      body {
+        padding-top: 50px; /* Adjusted padding to accommodate the top bars */
+        background-color: white; /* Set background color to grey */
+        color: white;
+        font-family: 'Roboto', sans-serif;
+        background-image: url("{% static 'bill.jpg' %}");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed; /* Ensures the background image stays fixed */
+        opacity: 1;
+      }
+
+      /* Transparent navbar */
+      .navbar-dark.bg-dark {
+        background-color: rgba(0, 0, 0, 0.4) !important; /* Transparent black background */
+        top: 40px; /* Maintain same top offset */
+        position: fixed;
+        width: 100%;
+        z-index: 1000;
+      }
+
+      /* Navbar branding */
+      .navbar-brand {
+        font-family: 'Lobster'; /* Maintain same font family for branding */
+        color: black !important; /* Ensure brand text color */
+      }
+
+      /* Navbar link styles */
+      .navbar-dark .navbar-nav .nav-link {
+        color: white !important; /* Ensure text color for nav links */
+      }
+
+      /* Navbar link hover effect */
+      .navbar-dark .navbar-nav .nav-link:hover {
+        background-color: rgba(0, 0, 0, 0.5) !important; /* Hover effect for nav links */
+        color: #f0f8ff !important; /* Change text color on hover */
+      }
+
+      .bill-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding: 20px;
+        margin-top: 20px;
+      }
+
+      .bill-form-box,
+      .bill-car-info-box {
+        background-color: rgba(0, 0, 0, 0.8);
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        margin: 20px;
+        flex: 1 1 45%;
+        animation: slideUp 0.5s ease-in;
+      }
+
+      .bill-form-box h2,
+      .bill-car-info-box h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        font-family: 'Lobster', sans-serif; /* Use Lobster font for headings */
+      }
+
+      .bill-form-fields {
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 15px;
+    }
+
+    .bill-form-fields label,
+    .bill-form-fields input {
+    display: block;
+    width: 100%;
+    }
+
+      .bill-form-fields label {
+        margin-bottom: 5px;
+      }
+
+      .bill-form-fields input {
+        margin-bottom: 15px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #333;
+        color: white;
+      }
+
+      .bill-form-buttons {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .bill-form-buttons button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: grey;
+    color: white; /* Change text color to white */
+    transition: background-color 0.3s;
+    }
+
+      .bill-form-buttons button:hover {
+    background-color: grey; /* Change background color to white */
+    color: white; /* Change text color to grey */
+    }
+
+      .bill-car-info-box img {
+        width: 100%;
+        height: auto;
+        max-width: 400px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .bill-car-info {
+        text-align: center;
+        font-family: sans-serif;
+
+      }
+
+      .bill-custom-popup {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background-color: grey;
+        color: white;
+        padding: 20px;
+        border-radius: 5px;
+        z-index: 9999;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      }
+
+      @keyframes slideIn {
+        from {
+          transform: translateX(100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+
+
+
+
+
+      .navbar,
+      .carousel.slide.mt-3 {
+        animation: slideUp 2s ease-out;
+      }
+
+      @media (max-width: 768px) {
+        .bill-container {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .bill-form-box,
+        .bill-car-info-box {
+          width: 90%;
+          margin: 10px 0;
+        }
+      }
+
+      .footer-map {
+    width: 100%;
+    height: 300px;
+    background-size: cover;
+    background-position: center;
+    }
+
+    .page-footer {
+    background-color: #343a40;
+    color: #fff;
+    padding-top: 40px;
+    }
+
+    .page-footer a {
+    color: #f8f9fa;
+    text-decoration: none;
+    }
+
+    .page-footer a:hover {
+    color: #adb5bd;
+    text-decoration: underline;
+    }
+
+    .page-footer .container .row div h6 {
+    font-weight: bold;
+    margin-bottom: 20px;
+    }
+
+    .page-footer .container .row div p,
+    .page-footer .container .row div ul li {
+    margin-bottom: 10px;
+    }
+
+
+/* Custom styles for alert messages */
+.alert-container .custom-popup {
+    background-color: white; /* White background */
+    color: black; /* Black text color */
+    border: 1px solid #ccc; /* Optional: light gray border for better visibility */
+    padding: 15px; /* Padding inside the alert box */
+    border-radius: 5px; /* Optional: rounded corners */
+    margin-bottom: 20px; /* Space between multiple alerts */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: slight shadow for better contrast */
+    opacity: 0; /* Start hidden for animation */
+    animation: slideup 3s ease forwards, fadeIn 1s ease forwards; /* Animation */
+}
+
+/* Keyframes for slideup animation */
+@keyframes slideup {
+    from {
+        opacity: 0;
+        transform: translateY(20px); /* Slide up from 20px below */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* Additional styles for specific alert types (success, error, etc.) if needed */
+.alert-success.custom-popup {
+    border-color: #28a745;
+}
+
+.alert-danger.custom-popup {
+    border-color: #dc3545;
+}
+
+.alert-warning.custom-popup {
+    border-color: #ffc107;
+}
+
+.alert-info.custom-popup {
+    border-color: #17a2b8;
+}
+
+
+    </style>
+  </head>
