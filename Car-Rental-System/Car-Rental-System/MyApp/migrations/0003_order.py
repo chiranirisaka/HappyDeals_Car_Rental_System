@@ -17,6 +17,8 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(default='', max_length=90)),
                 ('email', models.CharField(default='', max_length=50)),
                 ('phone', models.CharField(default='', max_length=20)),
+                ('address', models.CharField(default='', max_length=500)),
+                ('city', models.CharField(default='', max_length=50)),
             ],
         ),
     ]
