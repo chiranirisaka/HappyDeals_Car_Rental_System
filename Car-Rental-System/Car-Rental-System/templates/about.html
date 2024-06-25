@@ -100,3 +100,87 @@
 {% endblock style %}
 
 {% block body %}
+<div class="jumbotron">
+    <div class="container">
+        <h1 class="display-4">About Us</h1>
+        <p class="lead">HappyDeals was established in 2018 and digitally expanded in 2024. After more than 6 years in business, HappyDeals is ready to meet your expectations with our fully renewed fleet of vehicles.</p>
+        <a class="btn btn-dark btn-lg" href="#section-why-choose" role="button">Learn more</a>
+    </div>
+</div>
+
+<section id="section-why-choose">
+    <div class="container">
+        <h2 class="section-title">Why Choose Us?</h2>
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="feature-box">
+                    <img src="{% static 'trust.jpg' %}" alt="Trustworthy" width="300" height="300">
+                    <h2>Safe</h2>
+                    <p>Most trustworthy website for renting a vehicle in World. All the vehicles are well maintained and in good condition. Servicing is done after every two weeks.</p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="feature-box">
+                    <img src="{% static 'affordable.jpg' %}" alt="Affordable" width="300" height="300">
+                    <h2>Affordable Prices</h2>
+                    <p>All the rent are in affordable prices. If there is a problem in the vehicle, there is a return back policy. Payment can be made online safely.</p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="feature-box">
+                    <img src="{% static 'car-wash.jpg' %}" alt="Hygienic" width="300" height="300">
+                    <h2>Hygienic</h2>
+                    <p>Your comfort is our priority! All the vehicles are well-maintained and hygienic.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="section-vision-mission" class="faq-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h3>Our Vision</h3>
+                <p>To be the best car rental and fleet management company in Sri Lanka by protecting the values, beliefs, and trust that our customers have bestowed on us from inception, and to further develop these qualities to make our brand name truly remarkable.</p>
+            </div>
+            <div class="col-md-6">
+                <h3>Our Mission</h3>
+                <p>To deliver the best services in the car rental industry to our customers.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="section-features" class="faq-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h3>Wide Range of Vehicles</h3>
+                <p>Our extensive fleet of vehicles caters to all types of travelers, from solo adventurers to families and groups. We've got you covered.</p>
+            </div>
+            <div class="col-md-6">
+                <h3>Free Support</h3>
+                <p>Our dedicated customer support team is always ready to assist you. We're here to ensure your journey goes smoothly.</p>
+            </div>
+            <div class="col-md-6">
+                <h3>Easy Booking</h3>
+                <p>Booking your self-drive car rental in Sri Lanka with us is a breeze. Our user-friendly booking system allows you to reserve your vehicle via web.</p>
+            </div>
+            <div class="col-md-6">
+                <h3>Affordable</h3>
+                <p>We understand that travel expenses can add up, and we're committed to providing budget-friendly options that won't break the bank.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="section-faq" class="faq-section">
+    <div class="container">
+        <h3>Frequently Asked Questions (FAQs)</h3>
+        <p><strong>What documents do I need to rent a car?</strong><br>
+            A valid, original driving license should be presented by the vehicle renter and/or the driver when picking up the vehicle. A driving experience for a certain time period is not necessary. Customers who do not own a Sri Lankan driver's license should present a valid government issued ID card or passport, along with an international driver's permit.</p>
+    </div>
+</section>
+{% endblock body %}
+
