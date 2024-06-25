@@ -1,0 +1,297 @@
+{% extends 'base.html' %}
+
+{% block title %}Cars{% endblock title %}
+
+{%load static%}
+<link rel="stylesheet" href="{%static 'style.css'%}">
+
+{% block style %}
+
+body {
+        padding-top: 50px; /* Adjusted padding to accommodate the top bars */
+        background-color: white; /* Set background color to grey */
+        color: white;
+        font-family: 'Roboto', sans-serif;
+        background-image: url("{% static 'contact.jpeg' %}");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed; /* Ensures the background image stays fixed */
+        opacity: 1;
+      }
+
+
+.car-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Center align horizontally */
+    padding: 40px;
+    box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
+    width: 100%; /* Make the container full width */
+    height: 100%;
+}
+
+.car-box {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin: 15px; /* Adjust margin for spacing between boxes */
+    padding: 0; /* Remove padding */
+    text-align: center;
+    color: black;
+    font-weight: bold; /* Set font weight to bold */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    width: calc(33% - 30px); /* Adjust width to fit three boxes per row with margin */
+    min-width: 300px; /* Minimum width to ensure the box doesn't shrink too much */
+    height: 400px; /* Set a fixed height to make the boxes larger */
+    display: flex; /* Use flexbox */
+    flex-direction: column; /* Align children vertically */
+    justify-content: space-between; /* Space out the children */
+    background-size: contain; /* Ensure the background image fits within the box */
+    background-repeat: no-repeat; /* Prevent background image from repeating */
+    background-position: center;
+    position: relative;
+    overflow: hidden;
+    background-color: white;
+    transition: transform 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.car-box:hover {
+    transform: scale(1.05); /* Slightly enlarge the car box on hover */
+}
+
+.car-name {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px 8px 0 0; /* Rounded corners only on the top */
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+    color: black;
+    text-align: center;
+    box-sizing: border-box;
+    z-index: 2; /* Ensure it stays above other content */
+}
+
+.car-price {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    border-radius: 0 0 8px 8px; /* Rounded corners only on the bottom */
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+    color: black;
+    text-align: left; /* Align the price text to the left */
+    z-index: 2; /* Ensure it stays above other content */
+}
+
+.car-info-hidden {
+    display: none; /* Initially hidden */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
+    padding: 20px;
+    border-radius: 8px; /* Rounded corners */
+    color: black;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6); /* Subtle text shadow for better visibility */
+    z-index: 1; /* Ensure it stays above the background */
+    box-sizing: border-box;
+    overflow-y: auto; /* Allow scrolling if content is too tall */
+}
+
+.car-box:hover .car-info-hidden {
+    display: block; /* Show hidden info on hover */
+}
+
+.car-box button {
+    background-color: black; /* Black background */
+    color: white; /* White text */
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 10px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.car-box button:hover {
+    background-color: #333; /* Slightly lighter black on hover */
+}
+
+.fa {
+    margin-right: 5px;
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+
+
+/* Transparent black overlay for jumbotron */
+.jumbotron {
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.5); /* Transparent black background */
+    background-blend-mode: overlay; /* Ensure blend mode works with background image */
+    color: #fff; /* White text color */
+    padding: 60px 30px; /* Increase padding for a more spacious look */
+    margin-bottom: 0; /* Remove bottom margin */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+    animation: fadeInUp 1.5s ease-in-out; /* Fade-in animation */
+}
+
+.jumbotron .container {
+    position: relative; /* Enable positioning of child elements */
+    z-index: 1; /* Ensure content appears above overlay */
+}
+
+/* Booking History button styling */
+.booking-history {
+    position: absolute;
+    top: 50%;
+    right: 80px; /* Adjust as needed */
+    transform: translateY(-50%);
+}
+
+.booking-history a {
+    display: flex;
+    align-items: center;
+    color: red;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.booking-history a .icon {
+    margin-right: 10px;
+}
+
+.booking-history a:hover {
+    text-decoration: underline;
+}
+
+/* Jumbotron heading styling */
+.jumbotron-heading {
+    font-size: 50px; /* Large font size */
+    font-weight: bold; /* Bold text */
+    margin-bottom: 20px; /* Space below the heading */
+    animation: zoomIn 1s ease-in-out; /* Zoom-in animation */
+}
+
+/* Jumbotron paragraph styling */
+.jumbotron p {
+    font-size: 25px; /* Medium font size */
+    margin-top: 30px; /* Space above the paragraph */
+    animation: fadeIn 2s ease-in-out; /* Fade-in animation */
+}
+
+/* Keyframes for fadeInUp animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Keyframes for zoomIn animation */
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Keyframes for fadeIn animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+
+
+
+{% endblock style %}
+
+{% block body %}
+<main role="main" style="background-color: rgb(200, 200, 200)">
+
+    <section class="jumbotron text-center" style="background-image: url('{% static 'hand.webp' %}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+        <div class="overlay"></div> <!-- Transparent black overlay -->
+        <div class="container">
+            <h1 class="jumbotron-heading">Welcome {{ request.user }} !!</h1>
+            <p>Get wide varieties of cars at affordable prices!!</p>
+        </div>
+    </section>
+
+    <div class="booking-history">
+        <a href="{% url 'booking_history' %}">
+            <span class="icon"><i class="fa fa-history"></i></span> My Booking History
+        </a>
+    </div>
+
+    <div class="album py-5 bg-light" id="1" style="background-image: url('{% static 'main-cover.jpg' %}');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    opacity: 1;">
+        <div class="container" id="2">
+            <div class="row" id="3">
+                {% for i in car %}
+                <div class="col-md-4">
+                    <div class="car-box" style="background-image: url('{{ i.image_url }}'); margin: 10px;">
+                        <div class="car-name">
+                            <h4>{{ i.car_name }}</h4>
+                        </div>
+                        <div class="car-info-hidden">
+                            <br><br>
+                            <p><span>{{ i.availability|yesno:"Available,Not Available" }}</span></p>
+                            <p><i class="fa fa-users"></i> Maximum {{ i.max_persons }} persons</p>
+                            <p class="card-text">{{ i.car_desc }}</p>
+                            <p><i class="fa fa-gauge"></i> {{ i.fuel_efficiency }} km/l</p>
+                            <p>Price per km: Rs. {{ i.price_per_km }}</p>
+                            <a href="{% url 'rent_vehicle' i.pk %}">
+                                <button class="rent-btn">Rent Out</button>
+                            </a>
+                        </div>
+                        <div class="car-price">
+                            <p>Price per km: Rs. {{ i.price_per_km }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+</main>
+{% endblock body %}
+
+
